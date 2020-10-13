@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const button = e.target
                 const trainerId = button.parentElement.getAttribute(["data-id"])
                 
-                
                 const options = {
                     method: "POST",
                     headers: {
@@ -74,24 +73,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                     body: JSON.stringify({trainer_id: trainerId})
                 }
-
                 fetch(POKEMONS_URL, options)
                     .then(resp => resp.json())
                     .then(pokemon => {
-                        const pokeList = e.target.parentElement.querySelector("ul")
-                        const pokeLi = document.createElement("li")
-                        const pokeButton = document.createElement("button")
-                        pokeButton.classList.add("release")
-                        pokeButton.setAttribute("data-pokemon-id", pokemon.id)
-                        pokeButton.textContent = "Release"
-                        pokeLi.textContent = `
+                        if (!pokemon.error) {
+                            const pokeList = e.target.parentElement.querySelector("ul")
+                            const pokeLi = document.createElement("li")
+                            const pokeButton = document.createElement("button")
+                            pokeButton.classList.add("release")
+                            pokeButton.setAttribute("data-pokemon-id", pokemon.id)
+                            pokeButton.textContent = "Release"
+                            pokeLi.textContent = `
                             ${pokemon.nickname} (${pokemon.species}) 
                         `
-                        pokeLi.append(pokeButton)
-                        pokeList.append(pokeLi)
+                            pokeLi.append(pokeButton)
+                            pokeList.append(pokeLi)
+                        }
                     })
-                
-                 
             }
         })
         
@@ -100,17 +98,3 @@ document.addEventListener("DOMContentLoaded", () => {
     clickHandler();
     getTrainers();
 })
-
-// const sampleCard = document.createElement("div")
-    // sampleCard.innerHTML = `
-    //     <div class="card" data-id="1"><p>Prince</p>
-    //     <button data-trainer-id="1">Add Pokemon</button>
-    //     <ul>
-    //         <li>Jacey (Kakuna) <button class="release" data-pokemon-id="140">Release</button></li>
-    //         <li>Zachariah (Ditto) <button class="release" data-pokemon-id="141">Release</button></li>
-    //         <li>Mittie (Farfetch'd) <button class="release" data-pokemon-id="149">Release</button></li>
-    //         <li>Rosetta (Eevee) <button class="release" data-pokemon-id="150">Release</button></li>
-    //         <li>Rod (Beedrill) <button class="release" data-pokemon-id="151">Release</button></li>
-    //     </ul>
-    //     </div>
-    // `
