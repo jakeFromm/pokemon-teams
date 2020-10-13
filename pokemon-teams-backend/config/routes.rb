@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   delete '/pokemons/:id', to: 'pokemons#destroy'
   get '/trainers', to: 'trainers#index'
   get '/pokemons', to: 'pokemons#index'
+  # get '/trainers/:id', to: 'trainers#show'
 end

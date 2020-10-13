@@ -5,6 +5,7 @@ class PokemonsController < ApplicationController
     @pokemons = Pokemon.all
     render json: @pokemons
   end
+
   
   def create
     unless pokemon_params[:trainer_id].nil?
