@@ -8,10 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const getTrainers = () => {
         fetch(TRAINERS_URL)
             .then(resp => resp.json())
-            .then(trainers => renderTrainers(trainers))
+            .then(renderTrainers)
     }
 
-    const renderTrainers = (trainers) => {
+    const renderTrainers = trainers => {
         trainers.forEach(trainerObj => {
             renderTrainer(trainerObj)
         })
